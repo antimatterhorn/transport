@@ -36,8 +36,6 @@ bins = np.arange(1, num_bins + 1)
 
 from setup import *
 
-
-# Choose a source (replace with user input)
 source_name = source
 source_data = sources[source_name]
 source_spectrum = calculate_source_spectrum(source_data["brightness"], source_data["peak"], source_data["sigma"], bins)

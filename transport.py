@@ -13,11 +13,23 @@ def calculate_opacity(peak, sigma, x):
 # Function to calculate absorption through a material
 def calculate_absorption(source_spectrum, shell_thicknesses):
     abs_result = []
+    i = 0
     for material, drad in shell_thicknesses.items():
-        opacity = calculate_opacity(materials[material]["peak"], materials[material]["sigma"], bins)
+        peak = materials[material]["peak"]
+        sigma = materials[material]["sigma"]
+        
+        if i > 0:
+            key, value = list(shell_thicknesses.items())[i-1]
+            a = materials[key]["a"]*value/15.0
+            b = materials[key]["b"]*value/15.0
+            print(a,b,(1-0.8*a+0.7*b)**2,(1-0.3*a+0.2*b)**3)
+            peak = peak * (1-0.8*a+0.7*b)**2
+            sigma = sigma * (1-0.3*a+0.2*b)**3
+        opacity = calculate_opacity(peak, sigma, bins)
         density = materials[material]["density"]
         absorption = np.exp(-drad * opacity * density * 0.01)
         abs_result.append(absorption)
+        i+=1
     return np.array(abs_result)
 
 # Function to calculate source spectrum based on Gaussian function

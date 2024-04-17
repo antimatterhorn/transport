@@ -1,7 +1,7 @@
 source = "source2"
 
 shells = {
-    "bolognium": 15.0,
-    "turbonium": 25.0,
-    "unobtanium": 2.0,
+    "bolognium": 25.0,
+    "turbonium": 35.0,
+    "unobtanium": 90.0,
 }
